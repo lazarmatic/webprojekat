@@ -1,0 +1,89 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4 text-primary fw-bold" id="bookTitle">
+    Find yourself a book!
+  </h1>
+
+  <div class="mb-3">
+    <input
+      type="text"
+      id="searchBar"
+      class="form-control"
+      placeholder="Search for books..."
+      onkeyup="filterBooks()"
+    />
+  </div>
+
+  <div class="row" id="book-list">
+    <div class="col-md-3 mb-4">
+      <div class="card book-card">
+        <img
+          src="/frontend\assets\images\tgg.png"
+          class="card-img-top"
+          alt="The Great Gatsby"
+        />
+        <div class="card-body">
+          <h5 class="card-title">The Great Gatsby</h5>
+          <p class="card-text"><strong>Author:</strong> F. Scott Fitzgerald</p>
+          <p class="card-text">A classic novel set in the Jazz Age.</p>
+          <button class="btn btn-primary">Rent</button>
+          <button class="btn btn-primary">Buy</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4">
+      <div class="card book-card">
+        <img
+          src="/frontend\assets\images\1984.jpg"
+          class="card-img-top"
+          alt="1984"
+        />
+        <div class="card-body">
+          <h5 class="card-title">1984</h5>
+          <p class="card-text"><strong>Author:</strong> George Orwell</p>
+          <p class="card-text">
+            A dystopian novel about a totalitarian regime.
+          </p>
+          <button class="btn btn-primary">Rent</button>
+          <button class="btn btn-primary">Buy</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4">
+      <div class="card book-card">
+        <img
+          src="/frontend\assets\images\tkam.jpg"
+          class="card-img-top"
+          alt="To Kill a Mockingbird"
+        />
+        <div class="card-body">
+          <h5 class="card-title">To Kill a Mockingbird</h5>
+          <p class="card-text"><strong>Author:</strong> Harper Lee</p>
+          <p class="card-text">
+            A story of racial injustice in the Deep South.
+          </p>
+          <button class="btn btn-primary">Rent</button>
+          <button class="btn btn-primary">Buy</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4">
+      <div class="card book-card">
+        <img
+          src="/frontend\assets\images\md.jpg"
+          class="card-img-top"
+          alt="Moby-Dick"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Moby-Dick</h5>
+          <p class="card-text"><strong>Author:</strong> Herman Melville</p>
+          <p class="card-text">
+            An epic tale of a man's obsession with a white whale.
+          </p>
+          <button class="btn btn-primary">Rent</button>
+          <button class="btn btn-primary">Buy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/js/scripts.js"></script>

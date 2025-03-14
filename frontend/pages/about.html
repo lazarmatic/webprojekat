@@ -2,7 +2,7 @@
   <div class="text-center">
     <h2 class="section-heading text-uppercase">About</h2>
     <h3 class="section-subheading text-muted">
-      Look through timelapse of our company.
+      Look through timelapse of our library.
     </h3>
   </div>
   <ul class="timeline">
@@ -33,14 +33,14 @@
       <div class="timeline-image">
         <img
           class="rounded-circle img-fluid"
-          src="./assets/images/about/2.jpg"
+          src="./assets/images/about/about2.jpg"
           alt="..."
         />
       </div>
       <div class="timeline-panel">
         <div class="timeline-heading">
           <h4>March 2011</h4>
-          <h4 class="subheading">An Agency is Born</h4>
+          <h4 class="subheading">An Library is Born</h4>
         </div>
         <div class="timeline-body">
           <p class="text-muted">
@@ -63,7 +63,7 @@
       <div class="timeline-panel">
         <div class="timeline-heading">
           <h4>December 2015</h4>
-          <h4 class="subheading">Transition to Full Service</h4>
+          <h4 class="subheading">Transition to eLibrary</h4>
         </div>
         <div class="timeline-body">
           <p class="text-muted">
@@ -110,8 +110,6 @@
       </div>
     </li>
   </ul>
-  <button id="successBtn">Show Success Message</button>
-  <button id="errorBtn">Show Error Message</button>
   <div class="text-center">
     <h2 class="section-heading text-uppercase">Services</h2>
     <h3 class="section-subheading text-muted">
@@ -124,51 +122,55 @@
         <i class="fas fa-circle fa-stack-2x text-primary"></i>
         <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
       </span>
-      <h4 class="my-3">E-Commerce</h4>
+      <h4 class="my-3">Book store</h4>
       <p class="text-muted">
-        E-commerce is one of our main services. We are respected name in
-        E-commerce world and agency of trust for all kinds of electronic
-        commerce desired.
+        Book store is one of our main services. We are respected name in
+        books world and library of trust for all kinds of books desired.
+        To our respected clients, we offer the best prices in the region
+        with variety of discounts and sales.
       </p>
     </div>
     <div class="col-md-4">
       <span class="fa-stack fa-4x">
         <i class="fas fa-circle fa-stack-2x text-primary"></i>
-        <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+        <i class="fas fa-book fa-stack-1x fa-inverse"></i>
       </span>
-      <h4 class="my-3">Responsive Design</h4>
+      <h4 class="my-3">Book rental</h4>
       <p class="text-muted">
-        You do not need to worry about responsive design since that is our
-        proffesionality. Our company is a synonim for web pages and applications
-        with extraordinary responsive design.
+        You do not need to worry about expensive and rare books since that is our
+        proffesionality. Our library offers a huge range of diverse books available
+        for renting out. You are only few clicks away from your book being delivered
+        to your door or available and ready for pickup at our place.
       </p>
     </div>
     <div class="col-md-4">
       <span class="fa-stack fa-4x">
         <i class="fas fa-circle fa-stack-2x text-primary"></i>
-        <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+        <i class="fas fa-book-open-reader fa-stack-1x fa-inverse"></i>
       </span>
-      <h4 class="my-3">Web Security</h4>
+      <h4 class="my-3">Reading place</h4>
       <p class="text-muted" id="servisiranje1">
-        Leading company for web security by many magazines is our commpany. You
-        can sleep like a baby knowing that Matic company takes care of your
-        security.
+        Our library offers cosy, quiet and comfortable place for reading your favourite books.
+        You do not need to worry about noise or other factors that can distract you.
+        We offer free of charge usage of our laptops and scientific books for all students.
       </p>
     </div>
+    <h2> Form submission with AJAX</h2>
+    <form id="myForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name"><br><br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email"><br><br>
+      <button type="submit">Submit</button>
+    </form>
+    
+    <!--tabela edit delete ne radi??-->
+    <div id="message"></div>
+    <div>
     <h2>Services list</h1>
         <div class="tableContainer">
           <table id="servicesList"></table>
         </div>
       </div>
-      <h2> Form submission with AJAX</h2>
-      <form id="myForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name"><br><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email"><br><br>
-        <button type="submit">Submit</button>
-    </form>
-
-    <div id="message"></div>
 </div>
 <script src="../assets/js/scripts.js"></script>

@@ -329,3 +329,23 @@ form.onsubmit = (e) => {
     e.preventDefault();
   }
 };
+// book search
+function filterBooks() {
+  let input = document.getElementById("searchBar").value.toLowerCase();
+  let books = document.getElementsByClassName("book-card");
+
+  for (let book of books) {
+    let titleElement = book.getElementsByClassName("card-title")[0];
+    let title = titleElement.innerText.toLowerCase();
+
+    if (title.includes(input)) {
+      book.parentElement.style.display = "block";
+      titleElement.innerHTML = titleElement.innerText.replace(
+        new RegExp(input, "gi"),
+        (match) => `<span class='highlight'>${match}</span>`
+      );
+    } else {
+      book.parentElement.style.display = "none";
+    }
+  }
+}
