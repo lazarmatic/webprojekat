@@ -17,7 +17,7 @@
     <div class="col-md-3 mb-4">
       <div class="card book-card">
         <img
-          src="/frontend\assets\images\tgg.png"
+          src="/frontend/assets/images/tgg.png"
           class="card-img-top"
           alt="The Great Gatsby"
         />
@@ -25,65 +25,235 @@
           <h5 class="card-title">The Great Gatsby</h5>
           <p class="card-text"><strong>Author:</strong> F. Scott Fitzgerald</p>
           <p class="card-text">A classic novel set in the Jazz Age.</p>
-          <button class="btn btn-primary">Rent</button>
-          <button class="btn btn-primary">Buy</button>
+          <button
+            class="btn btn-primary"
+            onclick="openRentModal('The Great Gatsby', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', '/frontend/assets/images/tgg.png')"
+          >
+            Rent
+          </button>
+          <button
+            class="btn btn-primary"
+            onclick="openBuyModal('The Great Gatsby', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', '/frontend/assets/images/tgg.png')"
+          >
+            Buy
+          </button>
         </div>
       </div>
     </div>
     <div class="col-md-3 mb-4">
       <div class="card book-card">
         <img
-          src="/frontend\assets\images\1984.jpg"
+          src="/frontend/assets/images/md.jpg"
+          class="card-img-top"
+          alt="Moby Dick"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Moby Dick</h5>
+          <p class="card-text"><strong>Author:</strong> F. Scott Fitzgerald</p>
+          <p class="card-text">A classic novel set in the Jazz Age.</p>
+          <button
+            class="btn btn-primary"
+            onclick="openRentModal('Moby Dick', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', '/frontend/assets/images/md.jpg')"
+          >
+            Rent
+          </button>
+          <button
+            class="btn btn-primary"
+            onclick="openBuyModal('Moby Dick', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', '/frontend/assets/images/md.jpg')"
+          >
+            Buy
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4">
+      <div class="card book-card">
+        <img
+          src="/frontend/assets/images/1984.jpg"
           class="card-img-top"
           alt="1984"
         />
         <div class="card-body">
           <h5 class="card-title">1984</h5>
-          <p class="card-text"><strong>Author:</strong> George Orwell</p>
-          <p class="card-text">
-            A dystopian novel about a totalitarian regime.
-          </p>
-          <button class="btn btn-primary">Rent</button>
-          <button class="btn btn-primary">Buy</button>
+          <p class="card-text"><strong>Author:</strong> F. Scott Fitzgerald</p>
+          <p class="card-text">A classic novel set in the Jazz Age.</p>
+          <button
+            class="btn btn-primary"
+            onclick="openRentModal('1984', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', '/frontend/assets/images/1984.jpg')"
+          >
+            Rent
+          </button>
+          <button
+            class="btn btn-primary"
+            onclick="openBuyModal('1984', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', '/frontend/assets/images/1984.jpg')"
+          >
+            Buy
+          </button>
         </div>
       </div>
     </div>
     <div class="col-md-3 mb-4">
       <div class="card book-card">
         <img
-          src="/frontend\assets\images\tkam.jpg"
+          src="/frontend/assets/images/tkam.jpg"
           class="card-img-top"
-          alt="To Kill a Mockingbird"
+          alt="tkam.jpg"
         />
         <div class="card-body">
-          <h5 class="card-title">To Kill a Mockingbird</h5>
-          <p class="card-text"><strong>Author:</strong> Harper Lee</p>
-          <p class="card-text">
-            A story of racial injustice in the Deep South.
-          </p>
-          <button class="btn btn-primary">Rent</button>
-          <button class="btn btn-primary">Buy</button>
+          <h5 class="card-title">To Kill A Mockingbird</h5>
+          <p class="card-text"><strong>Author:</strong> F. Scott Fitzgerald</p>
+          <p class="card-text">A classic novel set in the Jazz Age.</p>
+          <button
+            class="btn btn-primary"
+            onclick="openRentModal('To Kill A Mockingbird', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', '/frontend/assets/images/tkam.jpg')"
+          >
+            Rent
+          </button>
+          <button
+            class="btn btn-primary"
+            onclick="openBuyModal('To Kill A Mockingbird', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', '/frontend/assets/images/tkam.jpg')"
+          >
+            Buy
+          </button>
         </div>
       </div>
     </div>
-    <div class="col-md-3 mb-4">
-      <div class="card book-card">
-        <img
-          src="/frontend\assets\images\md.jpg"
-          class="card-img-top"
-          alt="Moby-Dick"
-        />
-        <div class="card-body">
-          <h5 class="card-title">Moby-Dick</h5>
-          <p class="card-text"><strong>Author:</strong> Herman Melville</p>
-          <p class="card-text">
-            An epic tale of a man's obsession with a white whale.
-          </p>
-          <button class="btn btn-primary">Rent</button>
-          <button class="btn btn-primary">Buy</button>
+
+    <!-- Repeat for other books -->
+  </div>
+
+  <!-- Rent Modal -->
+  <div
+    class="modal fade"
+    id="rentModal"
+    tabindex="-1"
+    aria-labelledby="rentModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="rentModalLabel">Rent a Book</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body d-flex">
+          <img
+            id="rentBookImage"
+            src=""
+            class="img-fluid me-3"
+            alt="Book Cover"
+            style="width: 40%"
+          />
+          <div>
+            <h5 id="rentBookTitle"></h5>
+            <p><strong>Author:</strong> <span id="rentBookAuthor"></span></p>
+            <p id="rentBookDescription"></p>
+            <p><strong>Rent Price:</strong> $9.99</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-success">Confirm Rent</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buy Modal -->
+  <div
+    class="modal fade"
+    id="buyModal"
+    tabindex="-1"
+    aria-labelledby="buyModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="buyModalLabel">Buy a Book</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body d-flex">
+          <img
+            id="buyBookImage"
+            src=""
+            class="img-fluid me-3"
+            alt="Book Cover"
+            style="width: 40%"
+          />
+          <div>
+            <h5 id="buyBookTitle"></h5>
+            <p><strong>Author:</strong> <span id="buyBookAuthor"></span></p>
+            <p id="buyBookDescription"></p>
+            <p><strong>Buy Price:</strong> $19.99</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Confirm Buy</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<script src="../assets/js/scripts.js"></script>
+<script>
+  function openRentModal(title, author, description, imageUrl) {
+    document.getElementById("rentBookTitle").innerText = title;
+    document.getElementById("rentBookAuthor").innerText = author;
+    document.getElementById("rentBookDescription").innerText = description;
+    document.getElementById("rentBookImage").src = imageUrl;
+
+    var rentModal = new bootstrap.Modal(document.getElementById("rentModal"));
+    rentModal.show();
+  }
+  function filterBooks() {
+    let input = document.getElementById("searchBar").value.toLowerCase();
+    let books = document.getElementsByClassName("book-card");
+
+    for (let book of books) {
+      let titleElement = book.getElementsByClassName("card-title")[0];
+      let title = titleElement.innerText.toLowerCase();
+
+      if (title.includes(input)) {
+        book.parentElement.style.display = "block";
+        titleElement.innerHTML = titleElement.innerText.replace(
+          new RegExp(input, "gi"),
+          (match) => `<span class='highlight'>${match}</span>`
+        );
+      } else {
+        book.parentElement.style.display = "none";
+      }
+    }
+  }
+  function openBuyModal(title, author, description, imageUrl) {
+    document.getElementById("buyBookTitle").innerText = title;
+    document.getElementById("buyBookAuthor").innerText = author;
+    document.getElementById("buyBookDescription").innerText = description;
+    document.getElementById("buyBookImage").src = imageUrl;
+
+    var buyModal = new bootstrap.Modal(document.getElementById("buyModal"));
+    buyModal.show();
+  }
+</script>

@@ -7,67 +7,67 @@
 // Scripts
 //
 
-// Team people toggle requirement
-function teamshowing(button) {
-  const targetId = button.getAttribute("data-target");
-  const targetSection = document.getElementById(targetId);
+// // Team people toggle requirement
+// function teamshowing(button) {
+//   const targetId = button.getAttribute("data-target");
+//   const targetSection = document.getElementById(targetId);
 
-  if (targetSection.classList.contains("show")) {
-    targetSection.classList.remove("show");
-  } else {
-    targetSection.classList.add("show");
-  }
-}
+//   if (targetSection.classList.contains("show")) {
+//     targetSection.classList.remove("show");
+//   } else {
+//     targetSection.classList.add("show");
+//   }
+// }
 
-window.addEventListener("DOMContentLoaded", (event) => {
-  // Navbar shrink function
-  var navbarShrink = function () {
-    const navbarCollapsible = document.body.querySelector("#mainNav");
-    if (!navbarCollapsible) {
-      return;
-    }
-    if (window.scrollY === 0) {
-      navbarCollapsible.classList.remove("navbar-shrink");
-    } else {
-      navbarCollapsible.classList.add("navbar-shrink");
-    }
-  };
+// // Navbar shrink function
+// window.addEventListener("DOMContentLoaded", (event) => {
+//   var navbarShrink = function () {
+//     const navbarCollapsible = document.body.querySelector("#mainNav");
+//     if (!navbarCollapsible) {
+//       return;
+//     }
+//     if (window.scrollY === 0) {
+//       navbarCollapsible.classList.remove("navbar-shrink");
+//     } else {
+//       navbarCollapsible.classList.add("navbar-shrink");
+//     }
+//   };
 
-  // Shrink the navbar
-  navbarShrink();
+//   // Shrink the navbar
+//   navbarShrink();
 
-  // Shrink the navbar when page is scrolled
-  document.addEventListener("scroll", navbarShrink);
+//   // Shrink the navbar when page is scrolled
+//   document.addEventListener("scroll", navbarShrink);
 
-  //  Activate Bootstrap scrollspy on the main nav element
-  const mainNav = document.body.querySelector("#mainNav");
-  if (mainNav) {
-    new bootstrap.ScrollSpy(document.body, {
-      target: "#mainNav",
-      rootMargin: "0px 0px -40%",
-    });
-  }
+//   //  Activate Bootstrap scrollspy on the main nav element
+//   const mainNav = document.body.querySelector("#mainNav");
+//   if (mainNav) {
+//     new bootstrap.ScrollSpy(document.body, {
+//       target: "#mainNav",
+//       rootMargin: "0px 0px -40%",
+//     });
+//   }
 
-  // Collapse responsive navbar when toggler is visible
-  const navbarToggler = document.body.querySelector(".navbar-toggler");
-  const responsiveNavItems = [].slice.call(
-    document.querySelectorAll("#navbarResponsive .nav-link")
-  );
-  responsiveNavItems.map(function (responsiveNavItem) {
-    responsiveNavItem.addEventListener("click", () => {
-      if (window.getComputedStyle(navbarToggler).display !== "none") {
-        navbarToggler.click();
-      }
-    });
-  });
-});
+//   // Collapse responsive navbar when toggler is visible
+//   const navbarToggler = document.body.querySelector(".navbar-toggler");
+//   const responsiveNavItems = [].slice.call(
+//     document.querySelectorAll("#navbarResponsive .nav-link")
+//   );
+//   responsiveNavItems.map(function (responsiveNavItem) {
+//     responsiveNavItem.addEventListener("click", () => {
+//       if (window.getComputedStyle(navbarToggler).display !== "none") {
+//         navbarToggler.click();
+//       }
+//     });
+//   });
+// });
 
 // Fetching data from JSON to services page
-$(document).ready(function () {
+/* $(document).ready(function () {
   fetchServices();
-});
+}); */
 
-function fetchServices() {
+/* function fetchServices() {
   $.ajax({
     url: "../views/services.json", // Path to the JSON file
     type: "GET", // Type of the request
@@ -95,95 +95,62 @@ function fetchServices() {
       console.error("Error fetching Services:", error);
     },
   });
-}
+} */
 
-// Edit and delete JSON files
-$(document).on("click", ".edit-btn", function () {
-  let row = $(this).closest("tr");
-  let serviceName = row.find(".service-name").text().trim();
-  let serviceAvailable = row.find(".service-available").text().trim();
+// // Edit and delete JSON files
+// $(document).on("click", ".edit-btn", function () {
+//   let row = $(this).closest("tr");
+//   let serviceName = row.find(".service-name").text().trim();
+//   let serviceAvailable = row.find(".service-available").text().trim();
 
-  // Prompt the user to edit the details
-  let newServiceName = prompt("Edit Service Name:", serviceName);
-  let newServiceAvailable = prompt("Edit Availability:", serviceAvailable);
+//   // Prompt the user to edit the details
+//   let newServiceName = prompt("Edit Service Name:", serviceName);
+//   let newServiceAvailable = prompt("Edit Availability:", serviceAvailable);
 
-  if (newServiceName !== null && newServiceAvailable !== null) {
-    row.find(".service-name").text(newServiceName);
-    row.find(".service-available").text(newServiceAvailable);
-    alert("Service updated successfully!");
-  }
-});
+//   if (newServiceName !== null && newServiceAvailable !== null) {
+//     row.find(".service-name").text(newServiceName);
+//     row.find(".service-available").text(newServiceAvailable);
+//     alert("Service updated successfully!");
+//   }
+// });
 
-$(document).on("click", ".delete-btn", function () {
-  let row = $(this).closest("tr");
-  let serviceName = row.find(".service-name").text().trim();
+// $(document).on("click", ".delete-btn", function () {
+//   let row = $(this).closest("tr");
+//   let serviceName = row.find(".service-name").text().trim();
 
-  // Confirm deletion
-  let confirmDelete = confirm(
-    `Are you sure you want to delete the service: ${serviceName}?`
-  );
+//   // Confirm deletion
+//   let confirmDelete = confirm(
+//     `Are you sure you want to delete the service: ${serviceName}?`
+//   );
 
-  if (confirmDelete) {
-    row.remove();
-    alert("Service deleted successfully!");
-  }
-});
-
-// Toaster messages
-// Configure Toastr
-toastr.options = {
-  closeButton: true,
-  debug: false,
-  newestOnTop: false,
-  progressBar: true,
-  positionClass: "toast-top-right",
-  preventDuplicates: false,
-  onclick: null,
-  showDuration: "300",
-  hideDuration: "1000",
-  timeOut: "5000",
-  extendedTimeOut: "1000",
-  showEasing: "swing",
-  hideEasing: "linear",
-  showMethod: "fadeIn",
-  hideMethod: "fadeOut",
-};
+//   if (confirmDelete) {
+//     row.remove();
+//     alert("Service deleted successfully!");
+//   }
+// });
 
 // Display  toaster messages on button click
-document.getElementById("successBtn").addEventListener("click", function () {
+/* document.getElementById("successBtn").addEventListener("click", function () {
   toastr.success("Your action was successful!", "Success");
 });
 
 document.getElementById("errorBtn").addEventListener("click", function () {
   toastr.error("There was an error processing your request.", "Error");
-});
+}); */
 
-// Accordion menu - faq
-function toggleAccordion(contentId) {
-  const content = document.getElementById(contentId);
-  if (content.classList.contains("show")) {
-    content.classList.remove("show");
-  } else {
-    content.classList.add("show");
-  }
-}
+// // Accordion menu - faq
+// function toggleAccordion(contentId) {
+//   const content = document.getElementById(contentId);
+//   if (content.classList.contains("show")) {
+//     content.classList.remove("show");
+//   } else {
+//     content.classList.add("show");
+//   }
+// }
 // ajax form validation
-document.getElementById("myForm").addEventListener("submit", function (event) {
-  event.preventDefault(); // Prevent default form submission
 
-  // Get form data
-  var formData = new FormData(this);
-
-  // Simulate submission delay (2 seconds in this example)
-  setTimeout(function () {
-    // Display success message
-    document.getElementById("message").innerText = "Data saved successfully!";
-    alert("Service deleted successfully!");
-    console.log("succesfully");
-  }, 2000); // Change delay as needed
-});
 // rrrrrrrrrrrrrrrrrrrrrreeeeeeeeeeeeeeeeeeeeggggggggggggggggiiiiiiiiiiiisssssssssssttttttttttttteeeeeeeeeeeeerrrrrrrrrrr
-const form = document.querySelector("form");
+/* const form = document.querySelector("form");
 (eField = form.querySelector(".email")),
   (eInput = eField.querySelector("input")),
   (uField = form.querySelector(".username")),
@@ -328,24 +295,44 @@ form.onsubmit = (e) => {
   } else {
     e.preventDefault();
   }
-};
-// book search
-function filterBooks() {
-  let input = document.getElementById("searchBar").value.toLowerCase();
-  let books = document.getElementsByClassName("book-card");
+}; */
 
-  for (let book of books) {
-    let titleElement = book.getElementsByClassName("card-title")[0];
-    let title = titleElement.innerText.toLowerCase();
+// // book search
+// function filterBooks() {
+//   let input = document.getElementById("searchBar").value.toLowerCase();
+//   let books = document.getElementsByClassName("book-card");
 
-    if (title.includes(input)) {
-      book.parentElement.style.display = "block";
-      titleElement.innerHTML = titleElement.innerText.replace(
-        new RegExp(input, "gi"),
-        (match) => `<span class='highlight'>${match}</span>`
-      );
-    } else {
-      book.parentElement.style.display = "none";
-    }
-  }
-}
+//   for (let book of books) {
+//     let titleElement = book.getElementsByClassName("card-title")[0];
+//     let title = titleElement.innerText.toLowerCase();
+
+//     if (title.includes(input)) {
+//       book.parentElement.style.display = "block";
+//       titleElement.innerHTML = titleElement.innerText.replace(
+//         new RegExp(input, "gi"),
+//         (match) => `<span class='highlight'>${match}</span>`
+//       );
+//     } else {
+//       book.parentElement.style.display = "none";
+//     }
+//   }
+// }
+// function openRentModal(title, author, description, imageUrl) {
+//   document.getElementById("rentBookTitle").innerText = title;
+//   document.getElementById("rentBookAuthor").innerText = author;
+//   document.getElementById("rentBookDescription").innerText = description;
+//   document.getElementById("rentBookImage").src = imageUrl;
+
+//   var rentModal = new bootstrap.Modal(document.getElementById("rentModal"));
+//   rentModal.show();
+// }
+
+// function openBuyModal(title, author, description, imageUrl) {
+//   document.getElementById("buyBookTitle").innerText = title;
+//   document.getElementById("buyBookAuthor").innerText = author;
+//   document.getElementById("buyBookDescription").innerText = description;
+//   document.getElementById("buyBookImage").src = imageUrl;
+
+//   var buyModal = new bootstrap.Modal(document.getElementById("buyModal"));
+//   buyModal.show();
+// }
