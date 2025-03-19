@@ -37,6 +37,16 @@
           >
             Buy
           </button>
+          <button
+            class="btn btn-primary"
+            onclick="openReviewsModal('The Great Gatsby' , 'F. Scott Fitzgerald' , 'A classic novel set in the Jazz Age.' ,'/frontend/assets/images/tgg.png'  )"
+            (bookTitle,
+            bookAuthor,
+            bookDescription,
+            bookImage)
+          >
+            Reviews
+          </button>
         </div>
       </div>
     </div>
@@ -62,6 +72,16 @@
             onclick="openBuyModal('Moby Dick', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', '/frontend/assets/images/md.jpg')"
           >
             Buy
+          </button>
+          <button
+            class="btn btn-primary"
+            onclick="openReviewsModal('Moby Dick', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', '/frontend/assets/images/md.jpg')"
+            (bookTitle,
+            bookAuthor,
+            bookDescription,
+            bookImage)
+          >
+            Reviews
           </button>
         </div>
       </div>
@@ -89,6 +109,16 @@
           >
             Buy
           </button>
+          <button
+            class="btn btn-primary"
+            onclick="openReviewsModal('1984', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', '/frontend/assets/images/1984.jpg')"
+            (bookTitle,
+            bookAuthor,
+            bookDescription,
+            bookImage)
+          >
+            Reviews
+          </button>
         </div>
       </div>
     </div>
@@ -115,11 +145,111 @@
           >
             Buy
           </button>
+          <button
+            class="btn btn-primary"
+            onclick="openReviewsModal('To Kill A Mockingbird', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', '/frontend/assets/images/tkam.jpg')"
+            (bookTitle,
+            bookAuthor,
+            bookDescription,
+            bookImage)
+          >
+            Reviews
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Repeat for other books -->
+  </div>
+
+  <!-- Reviews Modal -->
+  <div
+    class="modal fade"
+    id="reviewsModal"
+    tabindex="-1"
+    aria-labelledby="reviewsModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg">
+      <!-- Larger modal -->
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="reviewsModalLabel">📖 Book Reviews</h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Book General Info -->
+          <div
+            class="d-flex align-items-center p-3 border rounded shadow-sm mb-4"
+          >
+            <img
+              id="reviewBookImage"
+              src=""
+              class="img-fluid rounded me-3"
+              alt="Book Cover"
+              style="width: 30%; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2)"
+            />
+            <div>
+              <h4 id="reviewBookTitle" class="fw-bold text-primary"></h4>
+              <p class="mb-1">
+                <strong>Author:</strong> <span id="reviewBookAuthor"></span>
+              </p>
+              <p id="reviewBookDescription" class="text-muted"></p>
+            </div>
+          </div>
+
+          <hr />
+
+          <!-- User Reviews Section -->
+          <h5 class="fw-bold">💬 User Reviews</h5>
+          <div id="reviewsContainer" class="mb-4"></div>
+          <!-- Reviews will be dynamically added here -->
+
+          <hr />
+
+          <!-- Add Review Section -->
+          <h5 class="fw-bold">➕ Add a Review</h5>
+          <div class="mb-3">
+            <input
+              type="text"
+              id="reviewUserName"
+              class="form-control border-primary shadow-sm"
+              placeholder="Your Name"
+            />
+          </div>
+          <div class="mb-3">
+            <textarea
+              id="reviewUserText"
+              class="form-control border-primary shadow-sm"
+              rows="3"
+              placeholder="Write your review..."
+            ></textarea>
+          </div>
+          <button
+            class="btn btn-primary w-100 fw-bold shadow-sm"
+            onclick="addReview()"
+          >
+            Submit Review
+          </button>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary fw-bold"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Rent Modal -->
@@ -164,7 +294,7 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-success">Confirm Rent</button>
+          <button type="button" class="btn btn-primary">Confirm Rent</button>
         </div>
       </div>
     </div>
@@ -255,5 +385,81 @@
 
     var buyModal = new bootstrap.Modal(document.getElementById("buyModal"));
     buyModal.show();
+  }
+  function openReviewsModal(bookTitle, bookAuthor, bookDescription, bookImage) {
+    document.getElementById("reviewBookTitle").innerText = bookTitle;
+    document.getElementById("reviewBookAuthor").innerText = bookAuthor;
+    document.getElementById("reviewBookDescription").innerText =
+      bookDescription;
+    document.getElementById("reviewBookImage").src = bookImage;
+
+    // Example reviews (Replace this with real database data)
+    const reviews = [
+      {
+        user: "Alice",
+        comment: "Absolutely loved this book! A timeless classic.",
+      },
+      {
+        user: "Bob",
+        comment: "A bit slow at times, but overall a great read.",
+      },
+      {
+        user: "Charlie",
+        comment: "One of my all-time favorites. Highly recommend!",
+      },
+    ];
+
+    // Clear previous reviews
+    const reviewsContainer = document.getElementById("reviewsContainer");
+    reviewsContainer.innerHTML = "";
+
+    // Populate the modal with reviews
+    reviews.forEach((review) => {
+      const reviewElement = document.createElement("div");
+      reviewElement.classList.add(
+        "card",
+        "mb-3",
+        "shadow-sm",
+        "border-light",
+        "review-card"
+      );
+      reviewElement.innerHTML = `
+        <div class="card-body">
+          <h6 class="fw-bold text-primary">${review.user}</h6>
+          <p class="text-muted mb-0">${review.comment}</p>
+        </div>`;
+      reviewsContainer.appendChild(reviewElement);
+    });
+
+    // Open the modal
+    var reviewsModal = new bootstrap.Modal(
+      document.getElementById("reviewsModal")
+    );
+    reviewsModal.show();
+  }
+
+  function addReview() {
+    const userName = document.getElementById("reviewUserName").value.trim();
+    const userText = document.getElementById("reviewUserText").value.trim();
+
+    if (userName === "" || userText === "") {
+      alert("Please enter your name and a review.");
+      return;
+    }
+
+    const reviewsContainer = document.getElementById("reviewsContainer");
+    const newReview = document.createElement("div");
+    newReview.classList.add("card", "mb-3", "shadow-sm", "border-light");
+    newReview.innerHTML = `
+      <div class="card-body">
+        <h6 class="fw-bold text-primary">${userName}</h6>
+        <p class="text-muted mb-0">${userText}</p>
+      </div>`;
+
+    reviewsContainer.appendChild(newReview);
+
+    // Clear input fields after submission
+    document.getElementById("reviewUserName").value = "";
+    document.getElementById("reviewUserText").value = "";
   }
 </script>

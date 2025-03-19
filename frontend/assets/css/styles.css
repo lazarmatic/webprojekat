@@ -13350,3 +13350,13 @@ section#contact form#contactForm :-ms-input-placeholder {
       padding: 15px;
       border-radius: 10px;
 }
+/* Hover effect for reviews */
+.review-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.review-card:hover {
+  transform: scale(1.05);
+  box-shadow: 18px 18px 30px rgba(0, 0, 0, 0.3);
+}

@@ -75,6 +75,11 @@ app.route({
         if (isValid) {
           alert("Registration successful!");
           this.submit(); // Submit the form
+          const username = (document.getElementById("username").value = "");
+          const fullName = (document.getElementById("name").value = "");
+          const email = (document.getElementById("email").value = "");
+          const phone = (document.getElementById("phone").value = "");
+          const password = (document.getElementById("password").value = "");
         }
       });
   },
@@ -120,6 +125,8 @@ app.route({
         if (isValid) {
           alert("Login successful!");
           this.submit(); // Submit the form
+          document.getElementById("username").value = "";
+          document.getElementById("password").value = "";
         }
       });
   },
