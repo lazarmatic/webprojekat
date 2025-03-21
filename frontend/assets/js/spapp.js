@@ -143,76 +143,131 @@ app.route({
         // Get form data
         var formData = new FormData(this);
 
-        // Simulate submission delay (2 seconds in this example)
+        // Simulate submission delay (1 seconds in this example)
         setTimeout(function () {
           // Display success message
           document.getElementById("message").innerText =
             "Data saved successfully!";
-        }, 2000); // Change delay as needed
+        }, 1000); // Change delay as needed
       });
-
-    function fetchServices() {
-      $.ajax({
-        url: "../views/services.json", // Path to the JSON file
-        type: "GET", // Type of the request
-        dataType: "json", // Expected data type of the response
-
-        success: function (data) {
-          let tabela = $("#servicesList");
-          tabela.append(
-            "<tr><th>Service</th><th>Availability</th><th>Actions</th></tr>"
-          );
-          data.forEach(function (serviceList) {
-            tabela.append(
-              `<tr>
-                    <td class="service-name"> ${serviceList.service} </td>
-                    <td class="service-available"> ${serviceList.available} </td>
-                    <td>
-                       <button class="edit-btn">Edit</button>
-                       <button class="delete-btn">Delete</button>
-                     </td>
-                 </tr>`
-            );
-          });
-        },
-        error: function (xhr, status, error) {
-          console.error("Error fetching Services:", error);
-        },
-      });
-    }
-    fetchServices();
-    // Edit and delete JSON files
-    $(document).on("click", ".edit-btn", function () {
-      let row = $(this).closest("tr");
-      let serviceName = row.find(".service-name").text().trim();
-      let serviceAvailable = row.find(".service-available").text().trim();
-
-      // Prompt the user to edit the details
-      let newServiceName = prompt("Edit Service Name:", serviceName);
-      let newServiceAvailable = prompt("Edit Availability:", serviceAvailable);
-
-      if (newServiceName !== null && newServiceAvailable !== null) {
-        row.find(".service-name").text(newServiceName);
-        row.find(".service-available").text(newServiceAvailable);
-        alert("Service updated successfully!");
-      }
-    });
-
-    $(document).on("click", ".delete-btn", function () {
-      let row = $(this).closest("tr");
-      let serviceName = row.find(".service-name").text().trim();
-
-      // Confirm deletion
-      let confirmDelete = confirm(
-        `Are you sure you want to delete the service: ${serviceName}?`
-      );
-
-      if (confirmDelete) {
-        row.remove();
-        alert("Service deleted successfully!");
-      }
-    });
   },
 });
 
+app.route({
+  view: "adminpage",
+  onCreate: function () {
+    function fetchBooks() {
+      $.ajax({
+        url: "../views/books.json", // Ensure this path is correct
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+          let tabela = $("#bookList tbody"); // Fix selector to target <tbody>
+          tabela.empty(); // Clear table before appending new rows
+
+          data.forEach(function (book) {
+            tabela.append(generateTableRow(book));
+          });
+        },
+        error: function (xhr, status, error) {
+          console.error("Error fetching books:", error);
+        },
+      });
+    }
+
+    function generateTableRow(book) {
+      return `
+        <tr>
+            <td class="book-title">${book.title}</td>
+            <td class="book-rent">${book.rent_price}</td>
+            <td class="book-buy">${book.buy_price}</td>
+            <td class="book-short">${book.short_description}</td>
+            <td class="book-long">${book.long_description}</td>
+            <td>
+                <button class="edit-btn btn btn-warning btn-sm">Edit</button>
+                <button class="delete-btn btn btn-danger btn-sm">Delete</button>
+            </td>
+        </tr>`;
+    }
+
+    // Add a new book
+    $("#addBookBtn").click(function () {
+      let title = prompt("Enter Book Title:");
+      let rentPrice = prompt("Enter Rent Price:");
+      let buyPrice = prompt("Enter Buy Price:");
+      let shortDescription = prompt("Enter Short Description:");
+      let longDescription = prompt("Enter Long Description:");
+
+      if (
+        title &&
+        rentPrice &&
+        buyPrice &&
+        shortDescription &&
+        longDescription
+      ) {
+        let newBook = {
+          title: title,
+          rent_price: rentPrice,
+          buy_price: buyPrice,
+          short_description: shortDescription,
+          long_description: longDescription,
+        };
+
+        $("#bookList tbody").append(generateTableRow(newBook)); // Fix selector
+        alert("New book added successfully!");
+      } else {
+        alert("All fields are required!");
+      }
+    });
+
+    // Edit book details
+    $(document).on("click", ".edit-btn", function () {
+      let row = $(this).closest("tr");
+      let bookTitle = row.find(".book-title").text().trim();
+      let rentPrice = row.find(".book-rent").text().trim();
+      let buyPrice = row.find(".book-buy").text().trim();
+      let shortDesc = row.find(".book-short").text().trim();
+      let longDesc = row.find(".book-long").text().trim();
+
+      let newTitle = prompt("Edit Book Title:", bookTitle);
+      let newRentPrice = prompt("Edit Rent Price:", rentPrice);
+      let newBuyPrice = prompt("Edit Buy Price:", buyPrice);
+      let newShortDesc = prompt("Edit Short Description:", shortDesc);
+      let newLongDesc = prompt("Edit Long Description:", longDesc);
+
+      if (
+        newTitle &&
+        newRentPrice &&
+        newBuyPrice &&
+        newShortDesc &&
+        newLongDesc
+      ) {
+        row.find(".book-title").text(newTitle);
+        row.find(".book-rent").text(newRentPrice);
+        row.find(".book-buy").text(newBuyPrice);
+        row.find(".book-short").text(newShortDesc);
+        row.find(".book-long").text(newLongDesc);
+        alert("Book updated successfully!");
+      }
+    });
+
+    // Delete book
+    $(document).on("click", ".delete-btn", function () {
+      let row = $(this).closest("tr");
+      let bookTitle = row.find(".book-title").text().trim();
+
+      let confirmDelete = confirm(
+        `Are you sure you want to delete the book: ${bookTitle}?`
+      );
+      if (confirmDelete) {
+        row.fadeOut(300, function () {
+          $(this).remove();
+        });
+        alert("Book deleted successfully!");
+      }
+    });
+
+    fetchBooks();
+  },
+});
 app.run();
