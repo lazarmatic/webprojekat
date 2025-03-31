@@ -2,24 +2,51 @@
 require_once 'dao/userDao.php';
 require_once 'dao/bookDao.php';
 require_once 'dao/reviewDao.php';
+require_once 'dao/bookStoreDao.php';
+require_once 'dao/bookRentalDao.php';
 
 
 $userDao = new userDao();
 $bookDao = new bookDao();
 $reviewDao = new reviewDao();
+$bookStoreDao = new bookStoreDao();
+$bookRentalDao = new bookRentalDao();
 
-$bookDao->updateBook(
-    11,
-    'The Great Gatsby (Updated)',
-    'F. Scott Fitzgerald',
-    6.99,
-    13.99,
-    'An updated short description...',
-    'An updated long detailed description...',
-    8,
-    1,
-    1
-);
+$bookRentalDao->insertRental(7, 7, date('Y-m-d H:i:s'), date('Y-m-d H:i:s'), 'Rented');
+
+
+// $reviewDao->deleteReview(4);
+// $userDao->deleteUser(4);
+// $bookDao->deleteBook(6);
+
+// $reviewDao->updateReview(
+//     1,
+//     4,
+//     9,
+//     'Updated review',
+//     date('Y-m-d H:i:s')
+// );
+// $userDao->updateUser(
+//     1,
+//     'updatedUsername',
+//     'Updated User',
+//     'updated@gmail.com',
+//     '123456789',
+//     'password123',
+//     'admin'
+// );
+// $bookDao->updateBook(
+//     11,
+//     'The Great Gatsby (Updated)',
+//     'F. Scott Fitzgerald',
+//     6.99,
+//     13.99,
+//     'An updated short description...',
+//     'An updated long detailed description...',
+//     8,
+//     1,
+//     1
+// );
 
 // $userDao->insertUser(
 //     'testusername',

@@ -31,4 +31,22 @@ class userDao extends BaseDao
 
         return $this->insert($data); // Call the base DAO's insert method
     }
+
+    public function updateUser($id, $username, $full_name, $email, $phone, $passw, $role)
+    {
+        $data = [
+            'username' => $username,
+            'full_name' => $full_name,
+            'email' => $email,
+            'phone' => $phone,
+            'passw' => $passw,
+            'role' => $role,
+        ];
+
+        return $this->update($id, $data); // Call BaseDao's update method
+    }
+    public function deleteUser($id)
+    {
+        return $this->delete($id); // Call BaseDao's delete method
+    }
 }

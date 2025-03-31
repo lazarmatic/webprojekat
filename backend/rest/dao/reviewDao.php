@@ -28,4 +28,19 @@ class reviewDao extends baseDao
 
         return $this->insert($data); // Call the base DAO's insert method
     }
+    public function updateReview($id, $user_id, $book_id, $review_text, $review_date)
+    {
+        $data = [
+            'user_id' => $user_id,
+            'book_id' => $book_id,
+            'review_text' => $review_text,
+            'review_date' => $review_date
+        ];
+
+        return $this->update($id, $data); // Call BaseDao's update method
+    }
+    public function deleteReview($id)
+    {
+        return $this->delete($id); // Call BaseDao's delete method
+    }
 }
