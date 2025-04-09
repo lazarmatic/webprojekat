@@ -12,117 +12,126 @@ $reviewDao = new reviewDao();
 $bookStoreDao = new bookStoreDao();
 $bookRentalDao = new bookRentalDao();
 
-$bookRentalDao->insertRental(7, 7, date('Y-m-d H:i:s'), date('Y-m-d H:i:s'), 'Rented');
 
+// print_r($userDao->getByEmail('dario@gmail.com'));
 
-// $reviewDao->deleteReview(4);
-// $userDao->deleteUser(4);
-// $bookDao->deleteBook(6);
+//$userDao->delete(5);
 
-// $reviewDao->updateReview(
-//     1,
-//     4,
-//     9,
-//     'Updated review',
-//     date('Y-m-d H:i:s')
-// );
-// $userDao->updateUser(
-//     1,
-//     'updatedUsername',
-//     'Updated User',
-//     'updated@gmail.com',
-//     '123456789',
-//     'password123',
-//     'admin'
-// );
-// $bookDao->updateBook(
-//     11,
-//     'The Great Gatsby (Updated)',
-//     'F. Scott Fitzgerald',
-//     6.99,
-//     13.99,
-//     'An updated short description...',
-//     'An updated long detailed description...',
-//     8,
-//     1,
-//     1
-// );
-
-// $userDao->insertUser(
-//     'testusername',
-//     'Lazar Matic',
-//     'testing@gmail.com',
-//     '063312245',
-//     'passwordtest',
-//     'admin'
-
-// );
-
-// $reviewDao->insertReview(
-//     4,
-//     11,
-//     'Testing book review',
-//     date('Y-m-d H:i:s')
-
-// );
-// $bookDao->insertBook(
-//     "The Newest Book",
-//     "Lazar Matic",
-//     5.99,
-//     12.99,
-//     "A short description...",
-//     "A long detailed description...",
-//     10,
-//     1,
-//     1
-// );
-
-// print_r($bookDao->getByBookTitle('The Great Gatsby'));
-
-// // Insert a new user (Customer)
+// $userDao->update(5, [
+//     'username' => 'dariopecelj',
+//     'full_name' => 'Dario Pecelj',
+//     'email' => 'darionew@gmail.com',
+//     'phone' => '23423423',
+//     'passw' => 'asdasd',
+//     'role' => 'User',
+// ]);
+ 
 // $userDao->insert([
-//     'username' => 'johndoeNEWEST',
-//     'full_name' => 'John Newest',
-//     'email' => 'johnNEWEST@example.com',
-//     'phone' => 063515244,
-//     'passw' => password_hash('password123', PASSWORD_DEFAULT),
-//     'role' => 'User'
+//     'username' => 'dariopecelj',
+//     'full_name' => 'Dario Pecelj',
+//     'email' => 'dario@gmail.com',
+//     'phone' => '23423423',
+//     'passw' => 'asdasd',
+//     'role' => 'User',
 // ]);
 
-// //insert a new book
-// $bookDao->insert([
-//     'title' => 'Test book',
-//     'author' => 'Lazar Matic',
-//     'rent_price' => 5.99,
-//     'buy_price' => 24.99,
-//     'description_short' => 'short description',
-//     'description_long' => 'Test book long description',
-//     'stock_quantity' => 5,
-//     'available_for_rent' => 0,
-//     'available_for_purchase' => 1
+
+//print_r($reviewDao->getReviewByBookId(9));
+
+// $reviewDao->delete(5);
+
+// $reviewDao->update(5, [
+//     'user_id' => 11,
+//     'book_id' => 9,
+//     'review_text' => 'Review text that is a little longer',
+//     'review_date' => date('Y-m-d H:i:s')
 // ]);
 
-// // Insert a new review
 // $reviewDao->insert([
-//     'user_id' => 3,
-//     'book_id' => 10,
+//     'user_id' => 11,
+//     'book_id' => 9,
 //     'review_text' => 'Review text',
 //     'review_date' => date('Y-m-d H:i:s')
 // ]);
 
+//print_r($bookStoreDao->getPurchaseByBookId(11));
+
+//$bookStoreDao->delete(6);
+
+// $bookStoreDao->update(
+//     6,
+//     [
+//         'user_id' => 11,
+//         'book_id' => 11,
+//         'purchase_date' => date('Y-m-d H:i:s'),
+//         'quantity' => 5,
+//         'total_price' => 40.99
+//     ]
+// );
+
+// $bookStoreDao->insert(
+//     [
+//         'user_id' => 7,
+//         'book_id' => 7,
+//         'purchase_date' => date('Y-m-d H:i:s'),
+//         'quantity' => 5,
+//         'total_price' => 40.99
+//     ]
+// );
 
 
 
+// print_r($bookRentalDao->getRentalByBookId(11));
 
-// // Fetch all users
-// $user = $userDao->getAll();
-// print_r($user);
+// $bookRentalDao->delete(14);
 
+// $bookRentalDao->update(
+//     15,
+//     [
+//         'user_id' => 11,
+//         'book_id' => 11,
+//         'rental_date' => date('Y-m-d H:i:s'),
+//         'return_date' => date('Y-m-d H:i:s'),
+//         'status' => 'Returned'
+//     ]
+// );
 
-// // Fetch all books
-// $book = $bookDao->getAll();
-// print_r($book);
+// $bookRentalDao->insert(
+//     [
+//         'user_id' => 7,
+//         'book_id' => 7,
+//         'rental_date' => date('Y-m-d H:i:s'),
+//         'return_date' => date('Y-m-d H:i:s'),
+//         'status' => 'Returned'
+//     ]
+// );
 
-// // Fetch all reviews
-// $review = $reviewDao->getAll();
-// print_r($review);
+// print_r($bookDao->getByBookID(22));
+// $bookDao->delete(23);
+// $bookDao->insert(
+//     [
+//         'title' => 'nnnnnnajnovija',
+//         'author' => 'Lazar Matic',
+//         'rent_price' => 5.99,
+//         'buy_price' => 12.99,
+//         'description_short' => 'short description',
+//         'description_long' => 'long description',
+//         'stock_quantity' => 4,
+//         'available_for_rent' => 1,
+//         'available_for_purchase' => 0
+//     ]
+// );
+// $bookDao->update(
+//     11,
+//     [
+//         'title' => 'najnovija',
+//         'author' => 'Lazar Matic',
+//         'rent_price' => 5.99,
+//         'buy_price' => 12.99,
+//         'description_short' => 'short description',
+//         'description_long' => 'long description',
+//         'stock_quantity' => 4,
+//         'available_for_rent' => 1,
+//         'available_for_purchase' => 0
+//     ]
+// );
