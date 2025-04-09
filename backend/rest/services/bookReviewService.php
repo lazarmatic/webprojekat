@@ -7,7 +7,7 @@ class bookReviewService extends BaseService
 
     public function __construct()
     {
-        $dao = new bookReviewService();
+        $dao = new reviewDao();
         parent::__construct($dao);
     }
 

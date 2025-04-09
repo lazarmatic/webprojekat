@@ -7,7 +7,7 @@ class userService extends BaseService
 
     public function __construct()
     {
-        $dao = new userService();
+        $dao = new userDao();
         parent::__construct($dao);
     }
 
