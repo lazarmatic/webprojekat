@@ -1,6 +1,7 @@
 <?php
 require_once 'baseService.php';
-require_once '../dao/userDao.php';
+//require_once '../dao/userDao.php';
+require_once 'C:\xampp\htdocs\webprojekat\backend\rest\dao\userDao.php';
 
 class userService extends BaseService
 {

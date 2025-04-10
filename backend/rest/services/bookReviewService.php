@@ -1,6 +1,7 @@
 <?php
 require_once 'baseService.php';
-require_once '../dao/reviewDao.php';
+//require_once '../dao/reviewDao.php';
+require_once 'C:\xampp\htdocs\webprojekat\backend\rest\dao\reviewDao.php';
 
 class bookReviewService extends BaseService
 {
