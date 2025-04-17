@@ -24,35 +24,4 @@ class bookStoreDao extends BaseDao
         $stmt->execute();
         return $stmt->fetchAll();
     }
-
-
-    public function insertPurchase($user_id, $book_id, $purchase_date, $quantity, $total_price)
-    {
-        $data = [
-            'user_id' => $user_id,
-            'book_id' => $book_id,
-            'purchase_date' => $purchase_date,
-            'quantity' => $quantity,
-            'total_price' => $total_price
-        ];
-
-        return $this->insert($data); // Call the base DAO's insert method
-    }
-
-    public function updatePurchase($id, $user_id, $book_id, $purchase_date, $quantity, $total_price)
-    {
-        $data = [
-            'user_id' => $user_id,
-            'book_id' => $book_id,
-            'purchase_date' => $purchase_date,
-            'quantity' => $quantity,
-            'total_price' => $total_price
-        ];
-
-        return $this->update($id, $data); // Call BaseDao's update method
-    }
-    public function deletePurchase($id)
-    {
-        return $this->delete($id); // Call BaseDao's delete method
-    }
 }

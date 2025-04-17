@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__ . '/../config.php';
+
+require_once 'C:\xampp\htdocs\webprojekat\backend\rest\config.php';
+//require_once 'backend\rest\config.php';
 
 
 class BaseDao
