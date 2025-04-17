@@ -11,6 +11,9 @@ $book_service = new bookService();
 $book_review_service = new bookReviewService();
 $user_service = new userService();
 
+print_r($books_by_author = $book_service->getByBookAuthor('LazarMatic'));
+
+
 
 //$book_delete = $book_service->delete(19);
 // $book_update = $book_service->update(

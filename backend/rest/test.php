@@ -12,8 +12,7 @@ $reviewDao = new reviewDao();
 $bookStoreDao = new bookStoreDao();
 $bookRentalDao = new bookRentalDao();
 
-
-// print_r($userDao->getByEmail('dario@gmail.com'));
+print_r($bookDao->getByBookAuthor('LazarMatic'));
 
 //$userDao->delete(5);
 

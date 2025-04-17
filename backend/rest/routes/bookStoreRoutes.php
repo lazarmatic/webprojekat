@@ -1,31 +1,143 @@
 <?php
 
-// Get a specific book Store by userID
+/**
+ * @OA\Get(
+ *     path="/bookPurchasesByUser/{user_id}",
+ *     tags={"bookPurchases"},
+ *     summary="Get book purchases by user ID",
+ *     @OA\Parameter(
+ *         name="user_id",
+ *         in="path",
+ *         required=true,
+ *         description="ID of the user",
+ *         @OA\Schema(type="integer", example=7)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Returns purchases made by a specific user"
+ *     )
+ * )
+ */
 Flight::route('GET /bookPurchasesByUser/@user_id', function ($user_id) {
     Flight::json(Flight::bookStoreService()->getPurchaseByUserId($user_id));
 });
-// Get a specific book Store by bookID
+
+/**
+ * @OA\Get(
+ *     path="/bookPurchasesByBook/{book_id}",
+ *     tags={"bookPurchases"},
+ *     summary="Get book purchases by book ID",
+ *     @OA\Parameter(
+ *         name="book_id",
+ *         in="path",
+ *         required=true,
+ *         description="ID of the book",
+ *         @OA\Schema(type="integer", example=7)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Returns purchases for a specific book"
+ *     )
+ * )
+ */
 Flight::route('GET /bookPurchasesByBook/@book_id', function ($book_id) {
     Flight::json(Flight::bookStoreService()->getPurchaseByBookId($book_id));
 });
-// Get all book Stores
+
+/**
+ * @OA\Get(
+ *     path="/bookPurchases",
+ *     tags={"bookPurchases"},
+ *     summary="Get all book purchases",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Returns all book purchases"
+ *     )
+ * )
+ */
 Flight::route('GET /bookPurchases', function () {
     Flight::json(Flight::bookStoreService()->getAll());
 });
 
-// Add a new book Store..
+/**
+ * @OA\Post(
+ *     path="/bookPurchases",
+ *     tags={"bookPurchases"},
+ *     summary="Add a new book purchase",
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"user_id", "book_id", "purchase_date", "quantity", "total_price"},
+ *             @OA\Property(property="user_id", type="integer", example=7),
+ *             @OA\Property(property="book_id", type="integer", example=7),
+ *             @OA\Property(property="purchase_date", type="string", format="date", example="2025-04-17"),
+ *             @OA\Property(property="quantity", type="integer", example=2),
+ *             @OA\Property(property="total_price", type="number", format="double", example=49.98)
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="New book purchase created"
+ *     )
+ * )
+ */
 Flight::route('POST /bookPurchases', function () {
     $data = Flight::request()->data->getData();
     Flight::json(Flight::bookStoreService()->create($data));
 });
 
-// Update a book Store by ID
+/**
+ * @OA\Put(
+ *     path="/bookPurchases/{id}",
+ *     tags={"bookPurchases"},
+ *     summary="Update a book purchase by ID",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID of the book purchase",
+ *         @OA\Schema(type="integer", example=7)
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"user_id", "book_id", "purchase_date", "quantity", "total_price"},
+ *             @OA\Property(property="user_id", type="integer", example=7),
+ *             @OA\Property(property="book_id", type="integer", example=7),
+ *             @OA\Property(property="purchase_date", type="string", format="date", example="2025-04-16"),
+ *             @OA\Property(property="quantity", type="integer", example=1),
+ *             @OA\Property(property="total_price", type="number", format="double", example=25.99)
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Book purchase updated"
+ *     )
+ * )
+ */
 Flight::route('PUT /bookPurchases/@id', function ($id) {
     $data = Flight::request()->data->getData();
     Flight::json(Flight::bookStoreService()->update($id, $data));
 });
 
-// Delete book Store by ID
+/**
+ * @OA\Delete(
+ *     path="/bookPurchases/{id}",
+ *     tags={"bookPurchases"},
+ *     summary="Delete a book purchase by ID",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID of the book purchase",
+ *         @OA\Schema(type="integer", example=9)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Book purchase deleted"
+ *     )
+ * )
+ */
 Flight::route('DELETE /bookPurchases/@id', function ($id) {
     Flight::json(Flight::bookStoreService()->delete($id));
 });
