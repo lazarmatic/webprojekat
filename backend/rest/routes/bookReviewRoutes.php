@@ -2,6 +2,31 @@
 
 /**
  * @OA\Get(
+ *     path="/bookReviewsByID/{id}",
+ *     tags={"bookReviews"},
+ *     summary="Get bookReviews by id",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="id of the bookReviews",
+ *         @OA\Schema(type="string", example=1)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Returns the bookReviews with the given id"
+ *     )
+ * )
+ */
+Flight::route('GET /bookReviewsByID/@id', function ($bookReview_id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
+    //$bookReview_id = Flight::request()->query['bookReview_id'] ?? null;
+    Flight::json(Flight::bookReviewService()->getReviewsByID($bookReview_id));
+});
+
+/**
+ * @OA\Get(
  *     path="/bookReviewsByBookId/{book_id}",
  *     tags={"bookReviews"},
  *     summary="Get book reviews by book ID",
@@ -19,6 +44,9 @@
  * )
  */
 Flight::route('GET /bookReviewsByBookId/@book_id', function ($book_id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
+    //$book_id = Flight::request()->query['book_id'] ?? null;
     Flight::json(Flight::bookReviewService()->getReviewByBookId($book_id));
 });
 
@@ -34,6 +62,8 @@ Flight::route('GET /bookReviewsByBookId/@book_id', function ($book_id) {
  * )
  */
 Flight::route('GET /bookReviews', function () {
+    Flight::auth_middleware();
+    //Flight::authorize_role(Roles::ADMIN);
     Flight::json(Flight::bookReviewService()->getAll());
 });
 
@@ -59,6 +89,8 @@ Flight::route('GET /bookReviews', function () {
  * )
  */
 Flight::route('POST /bookReviews', function () {
+    Flight::auth_middleware();
+    //Flight::authorize_role(Roles::ADMIN);
     $data = Flight::request()->data->getData();
     Flight::json(Flight::bookReviewService()->create($data));
 });
@@ -92,6 +124,8 @@ Flight::route('POST /bookReviews', function () {
  * )
  */
 Flight::route('PUT /bookReviews/@id', function ($id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
     $data = Flight::request()->data->getData();
     Flight::json(Flight::bookReviewService()->update($id, $data));
 });
@@ -115,5 +149,7 @@ Flight::route('PUT /bookReviews/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /bookReviews/@id', function ($id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
     Flight::json(Flight::bookReviewService()->delete($id));
 });
