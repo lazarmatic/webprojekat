@@ -9,6 +9,14 @@ class reviewDao extends baseDao
         parent::__construct("review");
     }
 
+    public function getReviewsByID($review_id)
+    {
+        $stmt = $this->connection->prepare("SELECT * FROM review WHERE id = :review_id");
+        $stmt->bindParam(':review_id', $review_id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
     public function getReviewByBookId($book_id)
     {
         $stmt = $this->connection->prepare("SELECT * FROM review WHERE book_id = :book_id");

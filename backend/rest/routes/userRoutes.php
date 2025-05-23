@@ -2,6 +2,30 @@
 
 /**
  * @OA\Get(
+ *     path="/users/{id}",
+ *     tags={"users"},
+ *     summary="Get user by ID",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID of the user",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Returns user with the given ID"
+ *     )
+ * )
+ */
+Flight::route('GET /users/@id', function ($id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
+    Flight::json(Flight::userService()->getUserByID($id));
+});
+
+/**
+ * @OA\Get(
  *     path="/users/{email}",
  *     tags={"users"},
  *     summary="Get user by email",
@@ -19,6 +43,9 @@
  * )
  */
 Flight::route('GET /users/@email', function ($email) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
+    $email = Flight::request()->query['email'] ?? null;
     Flight::json(Flight::userService()->getUserByEmail($email));
 });
 /**
@@ -33,6 +60,8 @@ Flight::route('GET /users/@email', function ($email) {
  * )
  */
 Flight::route('GET /users', function () {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
     Flight::json(Flight::userService()->getAll());
 });
 
@@ -60,6 +89,8 @@ Flight::route('GET /users', function () {
  * )
  */
 Flight::route('POST /users', function () {
+    Flight::auth_middleware();
+    //Flight::authorize_role(Roles::ADMIN);
     $data = Flight::request()->data->getData();
     Flight::json(Flight::userService()->create($data));
 });
@@ -95,6 +126,8 @@ Flight::route('POST /users', function () {
  * )
  */
 Flight::route('PUT /users/@id', function ($id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
     $data = Flight::request()->data->getData();
     Flight::json(Flight::userService()->update($id, $data));
 });
@@ -118,5 +151,7 @@ Flight::route('PUT /users/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /users/@id', function ($id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
     Flight::json(Flight::userService()->delete($id));
 });

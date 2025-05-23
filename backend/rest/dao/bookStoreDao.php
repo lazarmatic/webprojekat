@@ -9,7 +9,13 @@ class bookStoreDao extends BaseDao
         parent::__construct("bookStore");
     }
 
-
+    public function getByPurchaseID($purchase_id)
+    {
+        $stmt = $this->connection->prepare("SELECT * FROM bookstore WHERE id = :purchase_id");
+        $stmt->bindParam(':purchase_id', $purchase_id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
     public function getPurchaseByBookId($book_id)
     {
         $stmt = $this->connection->prepare("SELECT * FROM bookStore WHERE book_id = :book_id");

@@ -20,4 +20,8 @@ class bookStoreService extends BaseService
     {
         return $this->dao->getPurchaseByBookId($book_id);
     }
+    public function getByPurchaseID($purchase_id)
+    {
+        return $this->dao->getByPurchaseID($purchase_id);
+    }
 }

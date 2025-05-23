@@ -9,7 +9,13 @@ class userDao extends BaseDao
         parent::__construct("user");
     }
 
-
+    public function getUserByID($id)
+    {
+        $stmt = $this->connection->prepare("SELECT * FROM user WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
     public function getUserByEmail($email)
     {
         $stmt = $this->connection->prepare("SELECT * FROM user WHERE email = :email");

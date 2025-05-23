@@ -23,4 +23,9 @@ class bookService extends BaseService
     {
         return $this->dao->getByBookTitle($book_title);
     }
+
+    public function getByBookID($book_id)
+    {
+        return $this->dao->getByBookID($book_id);
+    }
 }

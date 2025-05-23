@@ -15,7 +15,7 @@ class bookDao extends BaseDao
         $stmt = $this->connection->prepare("SELECT * FROM book WHERE id = :book_id");
         $stmt->bindParam(':book_id', $book_id);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
     public function getByBookAuthor($book_author)
     {

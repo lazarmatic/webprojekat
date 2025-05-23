@@ -20,4 +20,8 @@ class bookRentalService extends BaseService
     {
         return $this->dao->getRentalByBookId($book_id);
     }
+    public function getByRentalID($rental_id)
+    {
+        return $this->dao->getByRentalID($rental_id);
+    }
 }

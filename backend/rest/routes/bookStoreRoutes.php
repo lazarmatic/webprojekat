@@ -1,5 +1,31 @@
 <?php
 
+
+/**
+ * @OA\Get(
+ *     path="/bookPurchasesByID/{id}",
+ *     tags={"bookPurchases"},
+ *     summary="Get bookPurchases by id",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="id of the bookPurchases",
+ *         @OA\Schema(type="string", example=1)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Returns the bookPurchases with the given id"
+ *     )
+ * )
+ */
+Flight::route('GET /bookPurchasesByID/@id', function ($bookPurchase_id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
+    //$bookPurchase_id = Flight::request()->query['bookPurchase_id'] ?? null;
+    Flight::json(Flight::bookStoreService()->getByPurchaseID($bookPurchase_id));
+});
+
 /**
  * @OA\Get(
  *     path="/bookPurchasesByUser/{user_id}",
@@ -19,6 +45,9 @@
  * )
  */
 Flight::route('GET /bookPurchasesByUser/@user_id', function ($user_id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
+    $user_id = Flight::request()->query['user_id'] ?? null;
     Flight::json(Flight::bookStoreService()->getPurchaseByUserId($user_id));
 });
 
@@ -41,6 +70,9 @@ Flight::route('GET /bookPurchasesByUser/@user_id', function ($user_id) {
  * )
  */
 Flight::route('GET /bookPurchasesByBook/@book_id', function ($book_id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
+    $book_id = Flight::request()->query['book_id'] ?? null;
     Flight::json(Flight::bookStoreService()->getPurchaseByBookId($book_id));
 });
 
@@ -56,6 +88,8 @@ Flight::route('GET /bookPurchasesByBook/@book_id', function ($book_id) {
  * )
  */
 Flight::route('GET /bookPurchases', function () {
+    Flight::auth_middleware();
+    //Flight::authorize_role(Roles::ADMIN);
     Flight::json(Flight::bookStoreService()->getAll());
 });
 
@@ -82,6 +116,8 @@ Flight::route('GET /bookPurchases', function () {
  * )
  */
 Flight::route('POST /bookPurchases', function () {
+    Flight::auth_middleware();
+    //Flight::authorize_role(Roles::ADMIN);
     $data = Flight::request()->data->getData();
     Flight::json(Flight::bookStoreService()->create($data));
 });
@@ -116,6 +152,8 @@ Flight::route('POST /bookPurchases', function () {
  * )
  */
 Flight::route('PUT /bookPurchases/@id', function ($id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
     $data = Flight::request()->data->getData();
     Flight::json(Flight::bookStoreService()->update($id, $data));
 });
@@ -139,5 +177,7 @@ Flight::route('PUT /bookPurchases/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /bookPurchases/@id', function ($id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
     Flight::json(Flight::bookStoreService()->delete($id));
 });

@@ -16,4 +16,8 @@ class bookReviewService extends BaseService
     {
         return $this->dao->getReviewByBookId($book_id);
     }
+    public function getReviewsByID($id)
+    {
+        return $this->dao->getReviewsByID($id);
+    }
 }
