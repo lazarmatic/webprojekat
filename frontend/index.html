@@ -23,8 +23,31 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/spapp.css" />
 
-    <script src="assets/js/jquery.min.js"></script>
+   <!--  <script src="assets/js/jquery.min.js"></script> -->
+    
+ 
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <script src="assets/js/jquery.spapp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+
+
+    <!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+ 
+    <script src="utils/constants.js"></script>
+<script src="utils/utils.js"></script>
+<script src="utils/rest-client.js"></script>
+<script src="services/user-service.js"></script>
+<script src="services/book-service.js"></script>
+<script src="services/bookrental-service.js"></script>
+<script src="services/bookpurchase-service.js"></script>
+<script src="services/adminuser-service.js"></script>
+<script src="services/bookreview-service.js"></script>
   </head>
   <body id="page-top">
     <!-- Navigation-->
@@ -47,22 +70,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-            <li class="nav-item">
+            <!-- <li class="nav-item dynamic-menu">
               <a class="nav-link" href="#adminpage">AdminPage</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item dynamic-menu">
               <a class="nav-link" href="#books">Books</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item dynamic-menu">
               <a class="nav-link" href="#about">About</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-            <li class="nav-item">
+            <li class="nav-item dynamic-menu">
+              <a class="nav-link" href="#team">Team</a>
+            </li>
+            <li class="nav-item dynamic-menu">
               <a class="nav-link" href="#contact">Contact</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item dynamic-menu">
               <a class="nav-link" href="#register">Join us!</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -78,8 +103,8 @@
       </div>
     </header>
     <section id="pageContent">
-      <main id="spapp" role="main">
-        <!-- Contact-->
+      <main id="spapp" role="main"> 
+        <!-- Contact -->
         <section
           class="page-section"
           id="contact"
@@ -185,10 +210,10 @@
       }
     };
 
-    // Shrink the navbar
+    
     navbarShrink();
 
-    // Shrink the navbar when page is scrolled
+
     document.addEventListener("scroll", navbarShrink);
 
     //  Activate Bootstrap scrollspy on the main nav element
@@ -213,4 +238,9 @@
       });
     });
   });
+  $(document).ready(function () {
+    UserService.generateMenuItems();
+  });
+  console.log("generateMenuItems called");
+
 </script>

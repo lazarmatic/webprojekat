@@ -19,6 +19,9 @@
  * )
  */
 Flight::route('GET /booksbyID/@id', function ($book_id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
+    //$book_id = Flight::request()->query['book_id'] ?? null;
     Flight::json(Flight::bookService()->getByID($book_id));
 });
 
@@ -41,6 +44,8 @@ Flight::route('GET /booksbyID/@id', function ($book_id) {
  * )
  */
 Flight::route('GET /booksByAuthor/@author', function ($book_author) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+    $book_author = Flight::request()->query['book_author'] ?? null;
     Flight::json(Flight::bookService()->getByBookAuthor($book_author));
 });
 
@@ -56,6 +61,8 @@ Flight::route('GET /booksByAuthor/@author', function ($book_author) {
  * )
  */
 Flight::route('GET /books', function () {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
     Flight::json(Flight::bookService()->getAll());
 });
 
@@ -86,6 +93,8 @@ Flight::route('GET /books', function () {
  * )
  */
 Flight::route('POST /books', function () {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
     $data = Flight::request()->data->getData();
     Flight::json(Flight::bookService()->create($data));
 });
@@ -124,6 +133,8 @@ Flight::route('POST /books', function () {
  * )
  */
 Flight::route('PUT /books/@id', function ($id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
     $data = Flight::request()->data->getData();
     Flight::json(Flight::bookService()->update($id, $data));
 });
@@ -147,5 +158,7 @@ Flight::route('PUT /books/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /books/@id', function ($id) {
+    Flight::auth_middleware();
+    Flight::authorize_role(Roles::ADMIN);
     Flight::json(Flight::bookService()->delete($id));
 });
