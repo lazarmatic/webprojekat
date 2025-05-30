@@ -1,137 +1,100 @@
+
 var app = $.spapp({
   defaultView: "#about",
   templateDir: "./pages/",
 });
-app.route({
-  view: "register",
-  onCreate: function () {
-    // document
-    //   .getElementById("registrationForm")
-    //   .addEventListener("submit", function (event) {
-    //     event.preventDefault(); // Prevent form submission
+// app.route({
+//   view: "register",
+//   onCreate: function () {
+//     console.log("Register view onCreate fired");
+//       console.log("Form found?", document.getElementById("registrationForm"));
 
-    //     let isValid = true;
+//     document
+//       .getElementById("registrationForm")
+//       .addEventListener("submit", function (event) {
+//         event.preventDefault(); // Prevent form submission
 
-    //     // Regex patterns
-    //     const usernameRegex = /^[a-zA-Z0-9]{3,15}$/;
-    //     const fullNameRegex = /^[A-Z][a-z]+\s[A-Z][a-z]+$/;
-    //     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    //     const phoneRegex = /^\d{7,15}$/;
-    //     const passwordRegex = /^(?=.*\d)[A-Za-z\d]{8,}$/;
+//         let isValid = true;
 
-    //     // Getting input values
-    //     const username = document.getElementById("username").value.trim();
-    //     const fullName = document.getElementById("name").value.trim();
-    //     const email = document.getElementById("email").value.trim();
-    //     const phone = document.getElementById("phone").value.trim();
-    //     const password = document.getElementById("password").value.trim();
+//         // Regex patterns
+//         const usernameRegex = /^[a-zA-Z0-9]{3,15}$/;
+//         const fullNameRegex = /^[A-Z][a-z]+\s[A-Z][a-z]+$/;
+//         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+//         const phoneRegex = /^\d{7,15}$/;
+//         const passwordRegex = /^(?=.*\d)[A-Za-z\d]{8,}$/;
 
-    //     // Username validation
-    //     if (!usernameRegex.test(username)) {
-    //       isValid = false;
-    //       document.getElementById("usernameError").textContent =
-    //         "Username must be 3-15 alphanumeric characters.";
-    //     } else {
-    //       document.getElementById("usernameError").textContent = "";
-    //     }
+//         // Getting input values
+//         const username = document.getElementById("username").value.trim();
+//         const fullName = document.getElementById("name").value.trim();
+//         const email = document.getElementById("email").value.trim();
+//         const phone = document.getElementById("phone").value.trim();
+//         const password = document.getElementById("password").value.trim();
 
-    //     // Full Name validation
-    //     if (!fullNameRegex.test(fullName)) {
-    //       isValid = false;
-    //       document.getElementById("nameError").textContent =
-    //         "Full Name must be in 'John Doe' format.";
-    //     } else {
-    //       document.getElementById("nameError").textContent = "";
-    //     }
+//         // Username validation
+//         if (!usernameRegex.test(username)) {
+//           isValid = false;
+//           document.getElementById("usernameError").textContent =
+//             "Username must be 3-15 alphanumeric characters.";
+//         } else {
+//           document.getElementById("usernameError").textContent = "";
+//         }
 
-    //     // Email validation
-    //     if (!emailRegex.test(email)) {
-    //       isValid = false;
-    //       document.getElementById("emailError").textContent =
-    //         "Enter a valid email address.";
-    //     } else {
-    //       document.getElementById("emailError").textContent = "";
-    //     }
+//         // Full Name validation
+//         if (!fullNameRegex.test(fullName)) {
+//           isValid = false;
+//           document.getElementById("nameError").textContent =
+//             "Full Name must be in 'John Doe' format.";
+//         } else {
+//           document.getElementById("nameError").textContent = "";
+//         }
 
-    //     // Phone Number validation
-    //     if (!phoneRegex.test(phone)) {
-    //       isValid = false;
-    //       document.getElementById("phoneError").textContent =
-    //         "Phone number must be 7-15 digits.";
-    //     } else {
-    //       document.getElementById("phoneError").textContent = "";
-    //     }
+//         // Email validation
+//         if (!emailRegex.test(email)) {
+//           isValid = false;
+//           document.getElementById("emailError").textContent =
+//             "Enter a valid email address.";
+//         } else {
+//           document.getElementById("emailError").textContent = "";
+//         }
 
-    //     // Password validation
-    //     if (!passwordRegex.test(password)) {
-    //       isValid = false;
-    //       document.getElementById("passwordError").textContent =
-    //         "Password must be at least 8 characters long and contain at least 1 number.";
-    //     } else {
-    //       document.getElementById("passwordError").textContent = "";
-    //     }
+//         // Phone Number validation
+//         if (!phoneRegex.test(phone)) {
+//           isValid = false;
+//           document.getElementById("phoneError").textContent =
+//             "Phone number must be 7-15 digits.";
+//         } else {
+//           document.getElementById("phoneError").textContent = "";
+//         }
 
-    //     // If all inputs are valid, submit the form
-    //     if (isValid) {
-    //       alert("Registration successful!");
-    //       this.submit(); // Submit the form
-    //       const username = (document.getElementById("username").value = "");
-    //       const fullName = (document.getElementById("name").value = "");
-    //       const email = (document.getElementById("email").value = "");
-    //       const phone = (document.getElementById("phone").value = "");
-    //       const password = (document.getElementById("password").value = "");
-    //     }
-    //   });
-  },
-});
+//         // Password validation
+//         if (!passwordRegex.test(password)) {
+//           isValid = false;
+//           document.getElementById("passwordError").textContent =
+//             "Password must be at least 8 characters long and contain at least 1 number.";
+//         } else {
+//           document.getElementById("passwordError").textContent = "";
+//         }
+        
+//         console.log("Is form valid?", isValid);
 
-app.route({
+//         // If all inputs are valid, submit the form
+//         if (isValid) {
+//           alert("Registration successful!");
+//           document.getElementById("username").value = "";
+//           document.getElementById("name").value = "";
+//           document.getElementById("email").value = "";
+//           document.getElementById("phone").value = "";
+//           document.getElementById("password").value = "";
+//         }
+//       });
+//   },
+// });
+
+/* app.route({
   view: "login",
-  onCreate: function () {
-   /*  document
-      .getElementById("loginForm")
-      .addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent form submission
-
-        let isValid = true;
-
-        // Regex patterns
-        const usernameRegex = /^[a-zA-Z0-9]{3,15}$/;
-        const passwordRegex = /^(?=.*\d)[A-Za-z\d]{8,}$/;
-
-        // Getting input values
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
-
-        // Username validation
-        if (!usernameRegex.test(username)) {
-          isValid = false;
-          document.getElementById("usernameError").textContent =
-            "Username must be 3-15 alphanumeric characters.";
-        } else {
-          document.getElementById("usernameError").textContent = "";
-        }
-
-        // Password validation
-        if (!passwordRegex.test(password)) {
-          isValid = false;
-          document.getElementById("passwordError").textContent =
-            "Password must be at least 8 characters long and contain at least 1 number.";
-        } else {
-          document.getElementById("passwordError").textContent = "";
-        }
-
-        // If all inputs are valid, submit the form
-        if (isValid) {
-        /*   alert("Login successful!"); 
-          this.submit(); // Submit the form
-          document.getElementById("username").value = "";
-          document.getElementById("password").value = "";
-        }
-      }); */
-  },
+  onCreate: 
 });
-
+ */
 app.route({
   view: "about",
   onCreate: function () {
