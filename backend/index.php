@@ -11,10 +11,7 @@ require_once "./middleware/authMiddleware.php";
 require_once "./data/Roles.php";
 
 
-/* 
-Flight::route('/', function () {  //define route and define function to handle request
-    echo 'Hello world!';
-}); */
+
 
 
 use Firebase\JWT\JWT;
