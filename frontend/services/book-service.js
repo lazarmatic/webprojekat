@@ -16,6 +16,7 @@ let BookService = {
             },
         });
         BookService.getAllBooks();
+        BookService.getAllBooksTwo();
     },
     openAddModal : function() {
         $('#addBookModal').show();
@@ -32,6 +33,92 @@ let BookService = {
             toastr.error(response.message);
         })
     },
+    getAllBooksTwo: function () {
+        RestClient.get("books", function (data) {
+            const container = $('#books-container');
+            container.empty();
+    
+            data.forEach(book => {
+                const card = `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">${book.title}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">${book.author}</h6>
+                                <p class="card-text"><strong>Rent:</strong> €${book.rent_price}<br>
+                                <strong>Buy:</strong> €${book.buy_price}<br>
+                                <strong>Stock:</strong> ${book.stock_quantity}<br>
+                                <strong>Rentable:</strong> ${book.available_for_rent ? "Yes" : "No"}<br>
+                                <strong>Purchasable:</strong> ${book.available_for_purchase ? "Yes" : "No"}</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+
+                                <button class="btn btn-primary btn-sm" onclick="BookService.makeReservationDirect('${book.id}')">Make Reservation</button>
+
+                                <button class="btn btn-primary btn-sm" onclick="BookService.makePurchaseDirect('${book.id}')">Make Purchase</button>
+
+                                <button class="btn btn-secondary btn-sm" onclick="BookService.openViewMore('${book.id}')">View</button>
+
+                                <button class="btn btn-info btn-sm" onclick="BookReviewService.openReviewsModal('${book.id}')">View Reviews</button>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.append(card);
+            });
+        }, function (xhr, status, error) {
+            console.error('Error fetching books:', error);
+        });
+    },
+    makeReservationDirect: function(bookId) {
+        const rental = {
+            user_id: localStorage.getItem("user_id"),
+            book_id: bookId,
+            rental_date: new Date().toISOString().split('T')[0],
+            return_date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            status: 'Rented'
+        };
+        BookRentalService.addRental(rental);
+    },
+    makePurchaseDirect: function(bookId) {
+        const purchase = {
+            user_id: localStorage.getItem("user_id"),
+            book_id: bookId,
+            purchase_date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            quantity: 1,
+            total_price: 15.99
+        };
+        BookPurchaseService.addPurchase(purchase);
+    },
+    openReviewsModal: function (bookId) {
+        $('#reviews-list').html('<div class="text-center">Loading...</div>');
+        const modal = new bootstrap.Modal(document.getElementById('bookReviewsModal'));
+        modal.show();
+    
+        RestClient.get("bookreviews", function (data) {
+            const reviews = data.filter(r => r.book_id == bookId);
+            if (reviews.length === 0) {
+                $('#reviews-list').html('<div class="alert alert-info">No reviews for this book yet.</div>');
+                return;
+            }
+    
+            const listItems = reviews.map(r => `
+                <div class="list-group-item">
+                    <h6>User ID: ${r.user_id} <small class="text-muted float-end">${r.review_date}</small></h6>
+                    <p>${r.review_text}</p>
+                </div>
+            `).join('');
+    
+            $('#reviews-list').html(listItems);
+        }, function (xhr, status, error) {
+            $('#reviews-list').html('<div class="alert alert-danger">Error loading reviews.</div>');
+            console.error("Error loading reviews:", error);
+        });
+    },
+    
     getAllBooks: function () {
         RestClient.get("books", function (data) {
             Utils.datatable('books-table', [

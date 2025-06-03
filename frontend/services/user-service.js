@@ -151,9 +151,13 @@
           dataType: "json", 
           success: function (result) {
             alert("Login successful!"); 
-               console.log(entity);
+            console.log(entity);
             console.log(result);
             localStorage.setItem("user_token", result.data.token);
+            const decoded = Utils.parseJwt(result.data.token);
+            if (decoded && decoded.user && decoded.user.id) {
+              localStorage.setItem("user_id", decoded.user.id);
+            }
           location.reload();
           window.location.replace("index.html#about"); 
           },
