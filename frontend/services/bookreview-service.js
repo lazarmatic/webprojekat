@@ -72,7 +72,9 @@ let BookReviewService = {
         RestClient.post("bookreviews", review, function () {
             toastr.success("Review added successfully");
             $.unblockUI();
-            BookReviewService.openReviewsModal(review.book_id);
+            BookReviewService.closeModal();
+
+          /*   BookReviewService.openReviewsModal(review.book_id); */
         }, function (response) {
             $.unblockUI();
             toastr.error(response.message);

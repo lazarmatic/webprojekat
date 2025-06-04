@@ -236,13 +236,14 @@ let BookService = {
         console.log("Submitting book:", book);
         $.blockUI({ message: '<h3>Processing...</h3>' });
         RestClient.put('books/' + book.id, book, function (data) {
-            $.unblockUI();
+            console.log("kgjrnd");
             toastr.success("Book edited successfully")
             BookService.closeModal()
+            $.unblockUI();
             BookService.getAllBooks();
         }, function (xhr, status, error) {
-            console.error('Error');
             $.unblockUI();
+            console.error('Error');
         });
     },
     openConfirmationDialog: function (book) {

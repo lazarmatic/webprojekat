@@ -107,10 +107,10 @@ let AdminUserService = {
     editUser: function (user) {
         $.blockUI({ message: '<h3>Processing...</h3>' });
         RestClient.put("users/" + user.id, user, function () {
-            $.unblockUI();
             toastr.success("User updated successfully");
             AdminUserService.closeModal();
-            AdminUserService.getAllUsers();
+            $.unblockUI();
+             AdminUserService.getAllUsers(); 
         }, function () {
             $.unblockUI();
             toastr.error("Failed to update user");
