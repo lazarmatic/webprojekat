@@ -1,6 +1,6 @@
 
 var app = $.spapp({
-  defaultView: "#about",
+  defaultView: "#login",
   templateDir: "./pages/",
 });
 // app.route({

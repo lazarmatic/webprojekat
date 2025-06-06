@@ -20,7 +20,6 @@
  */
 Flight::route('GET /booksbyID/@id', function ($book_id) {
     Flight::auth_middleware();
-    Flight::authorize_role(Roles::ADMIN);
     //$book_id = Flight::request()->query['book_id'] ?? null;
     Flight::json(Flight::bookService()->getByID($book_id));
 });
@@ -62,7 +61,6 @@ Flight::route('GET /booksByAuthor/@author', function ($book_author) {
  */
 Flight::route('GET /books', function () {
     Flight::auth_middleware();
-    Flight::authorize_role(Roles::ADMIN);
     Flight::json(Flight::bookService()->getAll());
 });
 

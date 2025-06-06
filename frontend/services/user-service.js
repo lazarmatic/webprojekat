@@ -4,8 +4,12 @@
         
         var token = localStorage.getItem("user_token");
         if (token && token !== undefined) {
-          window.location.replace("index.html");
+          window.location.hash= "#about";
         }
+        else{
+
+          window.location.hash= "#login";
+        
         document
           .getElementById("loginForm")
           .addEventListener("submit", function (event) {
@@ -50,6 +54,7 @@
               document.getElementById("password").value = "";
             }
           }); 
+        }
       },
 
       initRegister: function () {
@@ -151,11 +156,15 @@
           dataType: "json", 
           success: function (result) {
             alert("Login successful!"); 
-               console.log(entity);
+            console.log(entity);
             console.log(result);
             localStorage.setItem("user_token", result.data.token);
-          location.reload();
-          window.location.replace("index.html#about"); 
+            const decoded = Utils.parseJwt(result.data.token);
+            if (decoded && decoded.user && decoded.user.id) {
+              localStorage.setItem("user_id", decoded.user.id);
+            }
+            location.reload();
+          window.location.hash= "#about"; 
           },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Login unsuccessful!");
@@ -173,7 +182,7 @@
           dataType: "json",
           success: function (result) {
             toastr.success("Registration successful! Please log in.");
-            window.location.replace("index.html#login");
+            window.location.hash = "#login";
           },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
             const errorMsg = XMLHttpRequest?.responseText
@@ -186,7 +195,10 @@
     
       logout: function () {
         localStorage.clear();
-        window.location.replace("#login");
+        window.location.hash = "#login";
+
+        location.reload();
+
       },
 
       generateMenuItems: function() {
@@ -229,6 +241,7 @@
                 '<section id="books"  data-load="books.html"></section>'+
                 '<section id="about"  data-load="about.html"></section>'+
                 '<section id="team" data-load="team.html"></section>'+
+                '<section id="login" data-load="login.html"></section>'+
                 '<section id="contact" data-load="contact.html"></section>';
               $("#spapp").html(main);
               break;
@@ -259,6 +272,7 @@
                 '<section id="books"  data-load="books.html"></section>'+
                 '<section id="about"  data-load="about.html"></section>'+
                 '<section id="team" data-load="team.html"></section>'+
+                '<section id="login" data-load="login.html"></section>'+
                 '<section id="adminpage" data-load="adminpage.html"></section>'+
                 '<section id="contact" data-load="contact.html"></section>';
               $("#spapp").html(main);
