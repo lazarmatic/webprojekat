@@ -14,6 +14,14 @@ let BookReviewService = {
                 BookReviewService.editReview(review);
             },
         });
+        $("#inlineAddReviewForm").validate({
+            submitHandler: function (form) {
+                const review = Object.fromEntries(new FormData(form).entries());
+                BookReviewService.addReviewInline(review);
+                form.reset();
+            }
+        });
+        
 
         BookReviewService.getAllReviews();
 
@@ -54,6 +62,19 @@ let BookReviewService = {
             $.unblockUI();
             BookReviewService.getAllReviews();
             BookReviewService.closeModal();
+        }, function (response) {
+            $.unblockUI();
+            toastr.error(response.message);
+        });
+    },
+    addReviewInline: function (review) {
+        $.blockUI({ message: '<h3>Adding Review...</h3>' });
+        RestClient.post("bookreviews", review, function () {
+            toastr.success("Review added successfully");
+            $.unblockUI();
+            BookReviewService.closeModal();
+
+          /*   BookReviewService.openReviewsModal(review.book_id); */
         }, function (response) {
             $.unblockUI();
             toastr.error(response.message);
@@ -123,6 +144,37 @@ let BookReviewService = {
             '<input type="hidden" id="delete_review_id" value="' + review.id + '">' 
         );
     },
+    openReviewsModal: function (bookId) {
+        $('#reviews-list').html('<div class="text-center">Loading...</div>');
+    
+        // Set hidden input values dynamically
+        document.getElementById('review_book_id').value = bookId;
+        document.getElementById('review_user_id').value = localStorage.getItem("user_id");
+        document.getElementById('review_date').value = new Date().toISOString().split('T')[0];
+    
+        const modal = new bootstrap.Modal(document.getElementById('bookReviewsModal'));
+        modal.show();
+    
+        RestClient.get("bookreviews", function (data) {
+            const reviews = data.filter(r => r.book_id == bookId);
+            if (reviews.length === 0) {
+                $('#reviews-list').html('<div class="alert alert-info">No reviews for this book yet.</div>');
+                return;
+            }
+    
+            const listItems = reviews.map(r => `
+                <div class="list-group-item">
+                    <h6>User ID: ${r.user_id} <small class="text-muted float-end">${r.review_date}</small></h6>
+                    <p>${r.review_text}</p>
+                </div>
+            `).join('');
+    
+            $('#reviews-list').html(listItems);
+        }, function (xhr, status, error) {
+            $('#reviews-list').html('<div class="alert alert-danger">Error loading reviews.</div>');
+            console.error("Error loading reviews:", error);
+        });
+    },      
 
     deleteReview: function () {
         const id = $("#delete_review_id").val();
